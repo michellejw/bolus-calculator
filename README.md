@@ -1,4 +1,4 @@
-# bolus_calculator
+# Bolus Calculator
 
-A simple insulin dosing calculator.
+A simple insulin dosing calculator. 
 

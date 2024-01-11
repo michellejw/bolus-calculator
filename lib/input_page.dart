@@ -3,10 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'package:flip_card/flip_card.dart';
-
-const mainCardColor = Color(0xFF1D1E33);
-const bottomBarColor = Color(0xFFEB1555);
-const bottomBarHeight = 80.0;
+import 'constants.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key, required this.title});
@@ -18,6 +15,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  int foodAmount = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,14 +39,14 @@ class _InputPageState extends State<InputPage> {
                     direction: FlipDirection.HORIZONTAL, // default
                     side: CardSide.FRONT, // The side to initially display.
                     front: ReusableCard(
-                      cardColor: mainCardColor,
+                      cardColor: kMainCardColor,
                       cardChild: IconContent(
                         cardIcon: FontAwesomeIcons.appleWhole,
                         cardText: 'Serving Carbs (g)',
                       ),
                     ),
                     back: ReusableCard(
-                      cardColor: mainCardColor,
+                      cardColor: kMainCardColor,
                       cardChild: Center(
                         child: Text(
                           'Back of card!',
@@ -63,14 +62,14 @@ class _InputPageState extends State<InputPage> {
                     direction: FlipDirection.HORIZONTAL, // default
                     side: CardSide.FRONT, // The side to initially display.
                     front: ReusableCard(
-                      cardColor: mainCardColor,
+                      cardColor: kMainCardColor,
                       cardChild: IconContent(
                         cardIcon: FontAwesomeIcons.calculator,
                         cardText: 'Serving Quantity',
                       ),
                     ),
                     back: ReusableCard(
-                      cardColor: mainCardColor,
+                      cardColor: kMainCardColor,
                       cardChild: Center(
                         child: Text(
                           'Back of card!',
@@ -83,7 +82,7 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Row(
               children: [
                 Expanded(
@@ -91,20 +90,47 @@ class _InputPageState extends State<InputPage> {
                     fill: Fill.fillBack,
                     direction: FlipDirection.HORIZONTAL, // default
                     side: CardSide.FRONT, // The side to initially display.
-                    front: ReusableCard(
-                      cardColor: mainCardColor,
+                    front: const ReusableCard(
+                      cardColor: kMainCardColor,
                       cardChild: IconContent(
                         cardIcon: FontAwesomeIcons.utensils,
                         cardText: 'Food amount',
                       ),
                     ),
                     back: ReusableCard(
-                      cardColor: mainCardColor,
-                      cardChild: Center(
-                        child: Text(
-                          'Back of card!',
-                          style: TextStyle(fontSize: 25.0),
-                        ),
+                      cardColor: kMainCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Enter Food Amount',
+                            style: kLabelTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              SizedBox(
+                                width: 150.0,
+                                child: TextField(
+                                  style: kNumberTextStyle,
+                                  textAlign: TextAlign.center,
+                                  keyboardType: TextInputType.number,
+                                  // decoration: InputDecoration(
+                                  //   hintText: foodAmount.toString(),
+                                  // ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      foodAmount = int.parse(value);
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Text('grams'),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -121,14 +147,14 @@ class _InputPageState extends State<InputPage> {
                     direction: FlipDirection.HORIZONTAL, // default
                     side: CardSide.FRONT, // The side to initially display.
                     front: ReusableCard(
-                      cardColor: mainCardColor,
+                      cardColor: kMainCardColor,
                       cardChild: IconContent(
                         cardIcon: FontAwesomeIcons.droplet,
                         cardText: 'Current BG',
                       ),
                     ),
                     back: ReusableCard(
-                      cardColor: mainCardColor,
+                      cardColor: kMainCardColor,
                       cardChild: Center(
                         child: Text(
                           'Back of card!',
@@ -144,14 +170,14 @@ class _InputPageState extends State<InputPage> {
                     direction: FlipDirection.HORIZONTAL, // default
                     side: CardSide.FRONT, // The side to initially display.
                     front: ReusableCard(
-                      cardColor: mainCardColor,
+                      cardColor: kMainCardColor,
                       cardChild: IconContent(
                         cardIcon: FontAwesomeIcons.syringe,
                         cardText: 'Insulin:Carb Ratio',
                       ),
                     ),
                     back: ReusableCard(
-                      cardColor: mainCardColor,
+                      cardColor: kMainCardColor,
                       cardChild: Center(
                         child: Text(
                           'Back of card!',
@@ -165,12 +191,12 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Container(
-            color: bottomBarColor,
-            height: bottomBarHeight,
+            color: kBottomBarColor,
+            height: kBottomBarHeight,
             width: double.infinity,
             margin: const EdgeInsets.only(top: 10.0),
             child: const Center(
-              child: Text('Calculate Bolus',
+              child: Text('Calculate',
                   style: TextStyle(
                     fontSize: 30.0,
                   )),
