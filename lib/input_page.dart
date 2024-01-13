@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_content.dart';
 import 'reusable_card.dart';
-import 'package:flip_card/flip_card.dart';
 import 'constants.dart';
+import 'package:gap/gap.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key, required this.title});
@@ -16,6 +15,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   int foodAmount = 0;
+  int servingCarbs = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,168 +30,140 @@ class _InputPageState extends State<InputPage> {
       ),
       body: Column(
         children: [
-          const Expanded(
+          Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: FlipCard(
-                    fill: Fill.fillBack,
-                    direction: FlipDirection.HORIZONTAL, // default
-                    side: CardSide.FRONT, // The side to initially display.
-                    front: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: IconContent(
-                        cardIcon: FontAwesomeIcons.appleWhole,
-                        cardText: 'Serving Carbs (g)',
-                      ),
-                    ),
-                    back: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: Center(
-                        child: Text(
-                          'Back of card!',
-                          style: TextStyle(fontSize: 25.0),
+                  child: ReusableCard(
+                    cardColor: kMainCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'SERVING CARBS',
+                          style: kLabelTextStyle,
+                          textAlign: TextAlign.center,
                         ),
-                      ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          textBaseline: TextBaseline.alphabetic,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: [
+                            Text(
+                              servingCarbs.toString(),
+                              style: kNumberTextStyle,
+                            ),
+                            Text(
+                              ' g',
+                              style: kLabelTextStyle,
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FloatingActionButton(
+                              onPressed: () {},
+                              shape: const CircleBorder(),
+                              backgroundColor: const Color(0xFF4C4F5E),
+                              child: const Icon(
+                                FontAwesomeIcons.minus,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Gap(20.0),
+                            FloatingActionButton(
+                              onPressed: () {},
+                              shape: const CircleBorder(),
+                              backgroundColor: Color(0xFF4C4F5E),
+                              child: const Icon(
+                                FontAwesomeIcons.plus,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
                 ),
-                Expanded(
-                  child: FlipCard(
-                    fill: Fill.fillBack,
-                    direction: FlipDirection.HORIZONTAL, // default
-                    side: CardSide.FRONT, // The side to initially display.
-                    front: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: IconContent(
-                        cardIcon: FontAwesomeIcons.calculator,
-                        cardText: 'Serving Quantity',
-                      ),
-                    ),
-                    back: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: Center(
-                        child: Text(
-                          'Back of card!',
-                          style: TextStyle(fontSize: 25.0),
-                        ),
-                      ),
-                    ),
+                const Expanded(
+                  child: ReusableCard(
+                    cardColor: kMainCardColor,
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: FlipCard(
-                    fill: Fill.fillBack,
-                    direction: FlipDirection.HORIZONTAL, // default
-                    side: CardSide.FRONT, // The side to initially display.
-                    front: const ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: IconContent(
-                        cardIcon: FontAwesomeIcons.utensils,
-                        cardText: 'Food amount',
+            child: ReusableCard(
+              cardColor: kMainCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'FOOD AMOUNT',
+                    style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        foodAmount.toString(),
+                        style: kNumberTextStyle,
                       ),
+                      const Text(
+                        ' g',
+                        style: kLabelTextStyle,
+                      ),
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      thumbColor: kAccentColor,
+                      thumbShape: const RoundSliderThumbShape(
+                        enabledThumbRadius: 15,
+                      ),
+                      overlayShape: const RoundSliderOverlayShape(
+                        overlayRadius: 30,
+                      ),
+                      overlayColor: kAccentTransparentColor,
                     ),
-                    back: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Enter Food Amount',
-                            style: kLabelTextStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              SizedBox(
-                                width: 150.0,
-                                child: TextField(
-                                  style: kNumberTextStyle,
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  // decoration: InputDecoration(
-                                  //   hintText: foodAmount.toString(),
-                                  // ),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      foodAmount = int.parse(value);
-                                    });
-                                  },
-                                ),
-                              ),
-                              const Text('grams'),
-                            ],
-                          ),
-                        ],
-                      ),
+                    child: Slider(
+                      value: foodAmount.toDouble(),
+                      min: 0,
+                      max: 100,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          foodAmount = newValue.toInt();
+                        });
+                      },
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           const Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: FlipCard(
-                    fill: Fill.fillBack,
-                    direction: FlipDirection.HORIZONTAL, // default
-                    side: CardSide.FRONT, // The side to initially display.
-                    front: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: IconContent(
-                        cardIcon: FontAwesomeIcons.droplet,
-                        cardText: 'Current BG',
-                      ),
-                    ),
-                    back: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: Center(
-                        child: Text(
-                          'Back of card!',
-                          style: TextStyle(fontSize: 25.0),
-                        ),
-                      ),
-                    ),
+                  child: ReusableCard(
+                    cardColor: kMainCardColor,
                   ),
                 ),
                 Expanded(
-                  child: FlipCard(
-                    fill: Fill.fillBack,
-                    direction: FlipDirection.HORIZONTAL, // default
-                    side: CardSide.FRONT, // The side to initially display.
-                    front: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: IconContent(
-                        cardIcon: FontAwesomeIcons.syringe,
-                        cardText: 'Insulin:Carb Ratio',
-                      ),
-                    ),
-                    back: ReusableCard(
-                      cardColor: kMainCardColor,
-                      cardChild: Center(
-                        child: Text(
-                          'Back of card!',
-                          style: TextStyle(fontSize: 25.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                    child: ReusableCard(
+                  cardColor: kMainCardColor,
+                )),
               ],
             ),
           ),
           Container(
-            color: kBottomBarColor,
+            color: kAccentColor,
             height: kBottomBarHeight,
             width: double.infinity,
             margin: const EdgeInsets.only(top: 10.0),

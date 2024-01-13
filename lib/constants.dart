@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 const kMainCardColor = Color(0xFF1D1E33);
-const kBottomBarColor = Color(0xFFEB1555);
+const kAccentColor = Color(0xFFEB1555);
+const kAccentTransparentColor = Color(0x29EB1555);
 const kBottomBarHeight = 80.0;
 
 const kLabelTextStyle = TextStyle(
-  fontSize: 18.0,
+  fontSize: 20.0,
   color: Color(0xFF8D8E98),
 );
 
