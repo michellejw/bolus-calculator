@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
-import 'package:gap/gap.dart';
+
+import 'plus_minus_card.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key, required this.title});
@@ -14,8 +14,11 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  int foodAmount = 0;
-  int servingCarbs = 0;
+  int foodAmount = 1;
+  int servingCarbs = 1;
+  int servingAmount = 1;
+  int bgValue = 100;
+  int carbRatio = 15;
 
   @override
   Widget build(BuildContext context) {
@@ -34,131 +37,45 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(
-                    cardColor: kMainCardColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'SERVING CARBS',
-                          style: kLabelTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          textBaseline: TextBaseline.alphabetic,
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          children: [
-                            Text(
-                              servingCarbs.toString(),
-                              style: kNumberTextStyle,
-                            ),
-                            Text(
-                              ' g',
-                              style: kLabelTextStyle,
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FloatingActionButton(
-                              onPressed: () {},
-                              shape: const CircleBorder(),
-                              backgroundColor: const Color(0xFF4C4F5E),
-                              child: const Icon(
-                                FontAwesomeIcons.minus,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Gap(20.0),
-                            FloatingActionButton(
-                              onPressed: () {},
-                              shape: const CircleBorder(),
-                              backgroundColor: Color(0xFF4C4F5E),
-                              child: const Icon(
-                                FontAwesomeIcons.plus,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                  child: PlusMinusCard(
+                    titleText: 'SERVING CARBS',
+                    mainNumber: servingCarbs,
+                    minValue: 1,
                   ),
                 ),
-                const Expanded(
-                  child: ReusableCard(
-                    cardColor: kMainCardColor,
+                Expanded(
+                  child: PlusMinusCard(
+                    titleText: 'SERVING AMOUNT',
+                    mainNumber: servingAmount,
+                    minValue: 1,
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ReusableCard(
-              cardColor: kMainCardColor,
-              cardChild: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'FOOD AMOUNT',
-                    style: kLabelTextStyle,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        foodAmount.toString(),
-                        style: kNumberTextStyle,
-                      ),
-                      const Text(
-                        ' g',
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                  SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                      activeTrackColor: Colors.white,
-                      thumbColor: kAccentColor,
-                      thumbShape: const RoundSliderThumbShape(
-                        enabledThumbRadius: 15,
-                      ),
-                      overlayShape: const RoundSliderOverlayShape(
-                        overlayRadius: 30,
-                      ),
-                      overlayColor: kAccentTransparentColor,
-                    ),
-                    child: Slider(
-                      value: foodAmount.toDouble(),
-                      min: 0,
-                      max: 100,
-                      onChanged: (double newValue) {
-                        setState(() {
-                          foodAmount = newValue.toInt();
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
+            child: SliderCard(
+              titleText: 'FOOD AMOUNT',
+              mainNumber: foodAmount,
+              minValue: 0,
+              maxValue: 100,
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(
-                    cardColor: kMainCardColor,
+                  child: PlusMinusCard(
+                    titleText: 'BG VALUE',
+                    mainNumber: bgValue,
                   ),
                 ),
                 Expanded(
-                    child: ReusableCard(
-                  cardColor: kMainCardColor,
-                )),
+                  child: PlusMinusCard(
+                    titleText: 'CARB RATIO',
+                    mainNumber: carbRatio,
+                  ),
+                ),
               ],
             ),
           ),
@@ -174,6 +91,80 @@ class _InputPageState extends State<InputPage> {
                   )),
             ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class SliderCard extends StatefulWidget {
+  SliderCard({
+    super.key,
+    required this.titleText,
+    required this.mainNumber,
+    required this.minValue,
+    required this.maxValue,
+  });
+
+  final String titleText;
+  int mainNumber;
+  final int minValue;
+  final int maxValue;
+
+  @override
+  State<SliderCard> createState() => _SliderCardState();
+}
+
+class _SliderCardState extends State<SliderCard> {
+  @override
+  Widget build(BuildContext context) {
+    return ReusableCard(
+      cardColor: kMainCardColor,
+      cardChild: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            widget.titleText,
+            style: kLabelTextStyle,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                widget.mainNumber.toString(),
+                style: kNumberTextStyle,
+              ),
+              const Text(
+                ' g',
+                style: kLabelTextStyle,
+              ),
+            ],
+          ),
+          SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              activeTrackColor: Colors.white,
+              thumbColor: kAccentColor,
+              thumbShape: const RoundSliderThumbShape(
+                enabledThumbRadius: 15,
+              ),
+              overlayShape: const RoundSliderOverlayShape(
+                overlayRadius: 30,
+              ),
+              overlayColor: kAccentTransparentColor,
+            ),
+            child: Slider(
+              value: widget.mainNumber.toDouble(),
+              min: widget.minValue.toDouble(),
+              max: widget.maxValue.toDouble(),
+              onChanged: (double newValue) {
+                setState(() {
+                  widget.mainNumber = newValue.toInt();
+                });
+              },
+            ),
+          ),
         ],
       ),
     );
