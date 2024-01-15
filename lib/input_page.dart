@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
-
+import 'results_page.dart';
 import 'plus_minus_card.dart';
 
 class InputPage extends StatefulWidget {
@@ -79,16 +79,26 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kAccentColor,
-            height: kBottomBarHeight,
-            width: double.infinity,
-            margin: const EdgeInsets.only(top: 10.0),
-            child: const Center(
-              child: Text('Calculate',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                  )),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ResultsPage(),
+                ),
+              );
+            },
+            child: Container(
+              color: kAccentColor,
+              height: kBottomBarHeight,
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: const Center(
+                child: Text(
+                  'Calculate',
+                  style: kLargeButtonTextStyle,
+                ),
+              ),
             ),
           )
         ],
