@@ -1,4 +1,6 @@
+import 'package:bmi_calculator_flutter_mw/constants.dart';
 import 'package:flutter/material.dart';
+import 'reusable_card.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({super.key});
@@ -9,7 +11,26 @@ class ResultsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('BOLUS CALCULATOR'),
       ),
-      body: const Text('Show result here'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: const Text(
+                'Your Result',
+                style: kMainTitleStyle,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+                child: const ReusableCard(
+              cardColor: kMainCardColor,
+              cardChild: Column(),
+            )),
+          )
+        ],
+      ),
     );
   }
 }

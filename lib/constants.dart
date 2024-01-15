@@ -22,3 +22,9 @@ const kLargeButtonTextStyle = TextStyle(
 
 const kIconSize = 80.0;
 const kIconGapSize = 10.0;
+
+// Result page
+const kMainTitleStyle = TextStyle(
+  fontSize: 40.0,
+  fontWeight: FontWeight.bold,
+);
