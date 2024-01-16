@@ -1,6 +1,6 @@
 # Bolus Calculator
 
-A simple insulin dosing calculator. 
+A simple insulin dosing calculator.
 
-!['App Input Screen'](assets/bolus_calculator_app-input-screen.png)
+<img alt="&#39;App Input Screen&#39;" src="assets/bolus_calculator_app-input-screen.png" width="200"/>
 
