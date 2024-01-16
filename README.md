@@ -17,8 +17,8 @@ This app was created as a learning project for me. It is absolutely not intended
 
 The design and over-arching functionality of this app is based on a module in the ['Flutter bootcamp with Dart'](https://www.udemy.com/course/flutter-bootcamp-with-dart) Udemy course. This learning module was in turn based on a ['BMI calculator design by Ruben Vaalt'](https://dribbble.com/shots/4585382-Simple-BMI-Calculator). I didn't want to make a BMI calculator, so instead I chose to do this module as an insulin dosing calculator. While it's nearly exactly the same, I did make some slight changes:
 
-- Slightly adjusted the layout
-- (obviously) adjusted the calculation done in the application
+- Adjusted the layout
+- (obviously!) Adjusted the calculation done in the application
 - Made sure that no matter what the insulin dose is, the user gets a positive message. 
 - Made slight changes to how the code was refactored, which necessitated the use of callbacks between parent and child widgets. 
 
