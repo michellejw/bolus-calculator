@@ -5,9 +5,7 @@ import 'slider_card.dart';
 import 'bottom_button.dart';
 
 class InputPage extends StatefulWidget {
-  const InputPage({super.key, required this.title});
-
-  final String title;
+  const InputPage({super.key});
 
   @override
   State<InputPage> createState() => _InputPageState();
@@ -25,9 +23,9 @@ class _InputPageState extends State<InputPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
-        title: Center(
+        title: const Center(
           child: Text(
-            widget.title,
+            'BOLUS CALCULATOR',
           ),
         ),
       ),
@@ -64,12 +62,12 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: [
-                Expanded(
-                  child: PlusMinusCard(
-                    titleText: 'BG VALUE',
-                    mainNumber: bgValue,
-                  ),
-                ),
+                // Expanded(
+                //   child: PlusMinusCard(
+                //     titleText: 'BG VALUE',
+                //     mainNumber: bgValue,
+                //   ),
+                // ),
                 Expanded(
                   child: PlusMinusCard(
                     titleText: 'CARB RATIO',

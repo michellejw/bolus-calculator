@@ -15,6 +15,11 @@ const kNumberTextStyle = TextStyle(
   fontWeight: FontWeight.w900,
 );
 
+const kLargeNumberTextStyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+);
+
 const kLargeButtonTextStyle = TextStyle(
   fontSize: 25.0,
   fontWeight: FontWeight.bold,
@@ -27,4 +32,14 @@ const kIconGapSize = 10.0;
 const kMainTitleStyle = TextStyle(
   fontSize: 40.0,
   fontWeight: FontWeight.bold,
+);
+
+const kGreenLettersStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+  color: Color(0xFF53f7c3),
+);
+
+const kResultsExplainerText = TextStyle(
+  fontSize: 25.0,
 );

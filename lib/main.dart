@@ -3,11 +3,11 @@ import 'themes/theme.dart';
 import 'input_page.dart';
 
 void main() {
-  runApp(const BMICalculator());
+  runApp(const BolusCalculator());
 }
 
-class BMICalculator extends StatelessWidget {
-  const BMICalculator({super.key});
+class BolusCalculator extends StatelessWidget {
+  const BolusCalculator({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class BMICalculator extends StatelessWidget {
     return MaterialApp(
       theme: materialTheme.dark(), // Use the light theme
       title: 'Bolus Calculator App',
-      home: const InputPage(title: 'Bolus Calculator'),
+      home: const InputPage(),
     );
   }
 }
