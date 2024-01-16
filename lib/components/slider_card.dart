@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'reusable_card.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class SliderCard extends StatefulWidget {
   SliderCard({
@@ -9,12 +9,14 @@ class SliderCard extends StatefulWidget {
     required this.mainNumber,
     required this.minValue,
     required this.maxValue,
+    required this.onValueChanged,
   });
 
   final String titleText;
   int mainNumber;
   final int minValue;
   final int maxValue;
+  final Function(int) onValueChanged;
 
   @override
   State<SliderCard> createState() => _SliderCardState();
@@ -66,6 +68,7 @@ class _SliderCardState extends State<SliderCard> {
               onChanged: (double newValue) {
                 setState(() {
                   widget.mainNumber = newValue.toInt();
+                  widget.onValueChanged(widget.mainNumber);
                 });
               },
             ),

@@ -1,11 +1,20 @@
-import 'constants.dart';
+import 'package:bolus_calculator/constants.dart';
 import 'package:flutter/material.dart';
-import 'reusable_card.dart';
-import 'bottom_button.dart';
+import 'package:bolus_calculator/components/reusable_card.dart';
+import 'package:bolus_calculator/components/bottom_button.dart';
 import 'package:gap/gap.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({super.key});
+  const ResultsPage({
+    super.key,
+    required this.bolusAmountText,
+    required this.resultText,
+    required this.interpretationText,
+  });
+
+  final String bolusAmountText;
+  final String resultText;
+  final String interpretationText;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +29,12 @@ class ResultsPage extends StatelessWidget {
           Container(
             alignment: Alignment.centerLeft,
             margin: const EdgeInsets.only(bottom: 15.0),
-            child: const Text(
-              'Your Result',
-              style: kMainTitleStyle,
+            child: Container(
+              margin: const EdgeInsets.only(left: 10.0),
+              child: const Text(
+                'Your Result',
+                style: kMainTitleStyle,
+              ),
             ),
           ),
           Expanded(
@@ -31,21 +43,21 @@ class ResultsPage extends StatelessWidget {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text(
-                    'Insulin dose',
+                  Text(
+                    resultText,
                     style: kGreenLettersStyle,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     textBaseline: TextBaseline.alphabetic,
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: [
                       Text(
-                        '2.4',
+                        bolusAmountText,
                         style: kLargeNumberTextStyle,
                       ),
-                      Gap(10.0),
-                      Text(
+                      const Gap(10.0),
+                      const Text(
                         'units',
                         style: kLabelTextStyle,
                       )
@@ -55,8 +67,8 @@ class ResultsPage extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(
                       horizontal: 15.0,
                     ),
-                    child: const Text(
-                      'Note: This dose calculation does not include BG correction',
+                    child: Text(
+                      interpretationText,
                       style: kResultsExplainerText,
                       textAlign: TextAlign.center,
                     ),

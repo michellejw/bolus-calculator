@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'reusable_card.dart';
 import 'package:gap/gap.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class RoundIconButton extends StatelessWidget {
   const RoundIconButton(
@@ -38,6 +38,7 @@ class PlusMinusCard extends StatefulWidget {
     required this.mainNumber,
     this.minValue = 0,
     this.maxValue = 999,
+    required this.onValueChanged,
   })  : assert(minValue <= maxValue),
         assert(mainNumber >= minValue && mainNumber <= maxValue,
             'Value $mainNumber is not between minimum $minValue and maximum $maxValue');
@@ -46,6 +47,7 @@ class PlusMinusCard extends StatefulWidget {
   int mainNumber;
   final int minValue;
   final int maxValue;
+  final Function(int) onValueChanged;
 
   @override
   State<PlusMinusCard> createState() => _PlusMinusCardState();
@@ -90,6 +92,7 @@ class _PlusMinusCardState extends State<PlusMinusCard> {
                     if ((tempNumber >= widget.minValue) &
                         (tempNumber <= widget.maxValue)) {
                       widget.mainNumber--;
+                      widget.onValueChanged(widget.mainNumber);
                     }
                   });
                 },
@@ -103,6 +106,7 @@ class _PlusMinusCardState extends State<PlusMinusCard> {
                     if ((tempNumber >= widget.minValue) &
                         (tempNumber <= widget.maxValue)) {
                       widget.mainNumber++;
+                      widget.onValueChanged(widget.mainNumber);
                     }
                   });
                 },

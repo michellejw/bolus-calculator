@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'results_page.dart';
-import 'plus_minus_card.dart';
-import 'slider_card.dart';
-import 'bottom_button.dart';
+import 'package:bolus_calculator/components/plus_minus_card.dart';
+import 'package:bolus_calculator/components/slider_card.dart';
+import 'package:bolus_calculator/components/bottom_button.dart';
+import 'package:bolus_calculator/calculator_brain.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -15,8 +16,32 @@ class _InputPageState extends State<InputPage> {
   int foodAmount = 1;
   int servingCarbs = 1;
   int servingAmount = 1;
-  int bgValue = 100;
   int carbRatio = 15;
+
+  // Set up callbacks
+  void updateServingCarbs(int newCarbs) {
+    setState(() {
+      servingCarbs = newCarbs;
+    });
+  }
+
+  void updateFoodAmount(int newCarbs) {
+    setState(() {
+      foodAmount = newCarbs;
+    });
+  }
+
+  void updateServingAmount(int newCarbs) {
+    setState(() {
+      servingAmount = newCarbs;
+    });
+  }
+
+  void updateCarbRatio(int newCarbs) {
+    setState(() {
+      carbRatio = newCarbs;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +64,7 @@ class _InputPageState extends State<InputPage> {
                     titleText: 'SERVING CARBS',
                     mainNumber: servingCarbs,
                     minValue: 1,
+                    onValueChanged: updateServingCarbs,
                   ),
                 ),
                 Expanded(
@@ -46,6 +72,7 @@ class _InputPageState extends State<InputPage> {
                     titleText: 'SERVING AMOUNT',
                     mainNumber: servingAmount,
                     minValue: 1,
+                    onValueChanged: updateServingAmount,
                   ),
                 ),
               ],
@@ -57,6 +84,7 @@ class _InputPageState extends State<InputPage> {
               mainNumber: foodAmount,
               minValue: 0,
               maxValue: 100,
+              onValueChanged: updateFoodAmount,
             ),
           ),
           Expanded(
@@ -72,6 +100,7 @@ class _InputPageState extends State<InputPage> {
                   child: PlusMinusCard(
                     titleText: 'CARB RATIO',
                     mainNumber: carbRatio,
+                    onValueChanged: updateCarbRatio,
                   ),
                 ),
               ],
@@ -80,11 +109,23 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             buttonText: 'Calculate',
             onTap: () {
+              CalculatorBrain calc = CalculatorBrain(
+                servingCarbs: servingCarbs,
+                servingAmount: servingAmount,
+                foodAmount: foodAmount,
+                carbRatio: carbRatio,
+              );
+
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const ResultsPage(),
+                  builder: (context) => ResultsPage(
+                    bolusAmountText: calc.calculateBolus(),
+                    resultText: calc.getResult(),
+                    interpretationText: calc.getInterpretation(),
+                  ),
                 ),
               );
+              // print(calc.calculateBolus());
             },
           ),
         ],
